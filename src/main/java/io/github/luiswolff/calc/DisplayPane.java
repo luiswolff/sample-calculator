@@ -6,6 +6,7 @@ public class DisplayPane extends JTextField {
 
   public DisplayPane() {
     setEditable(false);
+    setName("display");
   }
 
 }
