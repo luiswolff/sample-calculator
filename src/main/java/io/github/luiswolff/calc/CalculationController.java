@@ -12,11 +12,16 @@ class CalculationController {
 
   CalculationController(Consumer<CalculationState> stateChangeHandler) {
     this.stateChangeHandler = stateChangeHandler;
+    notifyStateChangeHandler();
   }
 
   void onAction(String command) {
     CalculationCommand calculationCommand = CalculationCommand.fromDisplay(command);
     currentCalculationState = calculationCommand.execute(currentCalculationState);
+    notifyStateChangeHandler();
+  }
+
+  private void notifyStateChangeHandler() {
     stateChangeHandler.accept(currentCalculationState);
   }
 
