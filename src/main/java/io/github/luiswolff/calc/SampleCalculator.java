@@ -16,7 +16,7 @@ public class SampleCalculator extends JFrame {
     contentPane.add(displayPane, BorderLayout.NORTH);
     contentPane.add(numberFieldPanel, BorderLayout.CENTER);
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    setSize(200, 300);
+    setSize(185, 200);
   }
 
   static void main() {
