@@ -6,7 +6,6 @@ class DotCommandReceiver implements CalculationCommandReceiver{
 
   @Override
   public CalculationState action(CalculationState currentState, String command) {
-    System.out.println("received dot command");
-    return currentState;
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 }
