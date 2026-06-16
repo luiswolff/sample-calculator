@@ -1,28 +1,24 @@
 package io.github.luiswolff.calc;
 
 import java.awt.GridLayout;
+import java.util.Arrays;
+import java.util.function.Consumer;
+
 import javax.swing.JPanel;
 
-public class NumberFieldPanel extends JPanel {
+import io.github.luiswolff.calc.model.NumberFieldData;
 
-  public NumberFieldPanel() {
-    super(new GridLayout(4, 4));
-    add(new NumberButton("7"));
-    add(new NumberButton("8"));
-    add(new NumberButton("9"));
-    add(new NumberButton("/"));
-    add(new NumberButton("4"));
-    add(new NumberButton("5"));
-    add(new NumberButton("6"));
-    add(new NumberButton("*"));
-    add(new NumberButton("1"));
-    add(new NumberButton("2"));
-    add(new NumberButton("3"));
-    add(new NumberButton("-"));
-    add(new NumberButton("0"));
-    add(new NumberButton("."));
-    add(new NumberButton("="));
-    add(new NumberButton("+"));
+class NumberFieldPanel extends JPanel {
+
+  NumberFieldPanel(NumberFieldData numberFieldData) {
+    super(new GridLayout(numberFieldData.countRows(), numberFieldData.countColumns()));
+    Arrays.stream(numberFieldData.buttons()).map(NumberButton::new).forEach(this::add);
   }
 
+  void setHandler(Consumer<String> handler) {
+    Arrays.stream(getComponents())
+        .filter(NumberButton.class::isInstance)
+        .map(NumberButton.class::cast)
+        .forEach(b -> b.onClick(handler));
+  }
 }

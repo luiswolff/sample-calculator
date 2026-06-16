@@ -2,11 +2,29 @@ package io.github.luiswolff.calc;
 
 import javax.swing.JTextField;
 
-public class DisplayPane extends JTextField {
+import io.github.luiswolff.calc.model.CalculationState;
 
-  public DisplayPane() {
+class DisplayPane extends JTextField {
+
+  private CalculationState calculationState;
+
+  DisplayPane() {
     setEditable(false);
     setName("display");
+    setCalculationState(CalculationState.INITIAL_STATE);
+  }
+
+  void setCalculationState(CalculationState calculationState) {
+    this.calculationState = calculationState;
+    updateText();
+  }
+
+  public CalculationState getCalculationState() {
+    return calculationState;
+  }
+
+  private void updateText() {
+    setText(Float.toString(calculationState.rightTerm()));
   }
 
 }
