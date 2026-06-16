@@ -3,39 +3,42 @@ package io.github.luiswolff.calc.commands;
 import io.github.luiswolff.calc.model.CalculationState;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public enum CalculationCommand {
   // Top Row
-  SEVEN("7"),
-  EIGHT("8"),
-  NINE("9"),
-  DIVISION("/"),
+  SEVEN("7", NumberCommandReceiver::new),
+  EIGHT("8", NumberCommandReceiver::new),
+  NINE("9", NumberCommandReceiver::new),
+  DIVISION("/", OperationCommandReceiver::new),
 
   // Upper middle row
-  FOUR("4"),
-  FIVE("5"),
-  SIX("6"),
-  MULTIPLICATION("*"),
+  FOUR("4", NumberCommandReceiver::new),
+  FIVE("5", NumberCommandReceiver::new),
+  SIX("6", NumberCommandReceiver::new),
+  MULTIPLICATION("*", OperationCommandReceiver::new),
 
   // under middle row
-  ONE("1"),
-  TOW("2"),
-  THREE("3"),
-  SUBTRACTION("-"),
+  ONE("1", NumberCommandReceiver::new),
+  TOW("2", NumberCommandReceiver::new),
+  THREE("3", NumberCommandReceiver::new),
+  SUBTRACTION("-", OperationCommandReceiver::new),
 
   // bottom row
-  ZERO("0"),
-  DOT("."),
-  EQUALS("="),
-  ADDITION("+"),
+  ZERO("0", NumberCommandReceiver::new),
+  DOT(".", DotCommandReceiver::new),
+  EQUALS("=", EqualsCommandReceiver::new),
+  ADDITION("+", OperationCommandReceiver::new),
   ;
   public static final int COUNT_ROWS = 4;
   public static final int COUNT_COLUMNS = 4;
 
   private final String display;
+  private final Supplier<CalculationCommandReceiver> commandReceiver;
 
-  CalculationCommand(String display) {
+  CalculationCommand(String display, Supplier<CalculationCommandReceiver> commandReceiver) {
     this.display = display;
+    this.commandReceiver = commandReceiver;
   }
 
   public static String[] displays() {
@@ -47,7 +50,7 @@ public enum CalculationCommand {
   }
 
   public CalculationState execute(CalculationState currentState) {
-    return CalculationCommandReceiver.dummy().action(currentState, display);
+    return commandReceiver.get().action(currentState, display);
   }
 
   public static CalculationCommand fromDisplay(String display) {
