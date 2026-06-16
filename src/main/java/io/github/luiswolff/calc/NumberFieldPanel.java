@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import io.github.luiswolff.calc.model.NumberFieldData;
@@ -19,6 +20,14 @@ class NumberFieldPanel extends JPanel {
     Arrays.stream(getComponents())
         .filter(NumberButton.class::isInstance)
         .map(NumberButton.class::cast)
-        .forEach(b -> b.onClick(handler));
+        .forEach(b -> b.addActionListener(_ -> handler.accept(b.getText())));
+  }
+
+  private static class NumberButton extends JButton {
+
+    NumberButton(String text) {
+      setName("button-" + text);
+      setText(text);
+    }
   }
 }

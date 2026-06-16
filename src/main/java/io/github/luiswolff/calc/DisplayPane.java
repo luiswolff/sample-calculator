@@ -6,24 +6,12 @@ import io.github.luiswolff.calc.model.CalculationState;
 
 class DisplayPane extends JTextField {
 
-  private CalculationState calculationState;
-
   DisplayPane() {
     setEditable(false);
     setName("display");
-    setCalculationState(CalculationState.INITIAL_STATE);
   }
 
-  void setCalculationState(CalculationState calculationState) {
-    this.calculationState = calculationState;
-    updateText();
-  }
-
-  public CalculationState getCalculationState() {
-    return calculationState;
-  }
-
-  private void updateText() {
+  void updateText(CalculationState calculationState) {
     setText(Float.toString(calculationState.rightTerm()));
   }
 
