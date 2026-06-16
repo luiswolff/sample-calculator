@@ -16,7 +16,7 @@ enum ExpectedUiComponents {
   BUTTON_MULTIPLY("button-*"),
   BUTTON_DEVIATE("button-/"),
   BUTTON_EQUALS("button-="),
-  BUTTON_DOT("button-."),
+  BUTTON_CLEAR("button-C"),
   DISPLAY("display"),
   ;
 

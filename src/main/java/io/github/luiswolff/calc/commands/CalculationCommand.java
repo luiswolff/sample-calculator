@@ -25,7 +25,7 @@ public enum CalculationCommand {
   SUBTRACTION("-", OperationCommandReceiver::new),
 
   // bottom row
-  DOT("C", ClearCommandReceiver::new),
+  CLEAR("C", ClearCommandReceiver::new),
   ZERO("0", NumberCommandReceiver::new),
   EQUALS("=", EqualsCommandReceiver::new),
   ADDITION("+", OperationCommandReceiver::new),
