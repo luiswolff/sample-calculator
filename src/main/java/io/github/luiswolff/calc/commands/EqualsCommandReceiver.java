@@ -6,7 +6,17 @@ class EqualsCommandReceiver implements CalculationCommandReceiver{
 
   @Override
   public CalculationState action(CalculationState currentState, String command) {
-    System.out.println("Received equals command");
-    return currentState;
+    return new CalculationState(currentState.leftTerm(), currentState.operation(), resolve(currentState));
+  }
+
+  private Float resolve(CalculationState currentState) {
+    return switch (currentState.operation()) {
+      case "+" -> currentState.leftTerm() + currentState.rightTerm();
+      case "-" -> currentState.leftTerm() - currentState.rightTerm();
+      case "*" -> currentState.leftTerm() * currentState.rightTerm();
+      case "/" -> currentState.leftTerm() / currentState.rightTerm();
+      default ->
+          throw new UnsupportedOperationException("Not supported" + currentState.operation());
+    };
   }
 }

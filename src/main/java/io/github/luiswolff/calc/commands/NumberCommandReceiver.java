@@ -6,7 +6,7 @@ class NumberCommandReceiver implements CalculationCommandReceiver {
 
   @Override
   public CalculationState action(CalculationState currentState, String command) {
-    System.out.println("Received number command: " + command);
-    return currentState;
+    float newRightTerm = Float.parseFloat(currentState.rightTerm().intValue() + command);
+    return new CalculationState(currentState.leftTerm(), currentState.operation(), newRightTerm);
   }
 }
