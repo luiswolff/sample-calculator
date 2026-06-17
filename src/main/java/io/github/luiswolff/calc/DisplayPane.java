@@ -2,8 +2,6 @@ package io.github.luiswolff.calc;
 
 import javax.swing.JTextField;
 
-import io.github.luiswolff.calc.model.CalculationState;
-
 class DisplayPane extends JTextField {
 
   DisplayPane() {
@@ -11,8 +9,8 @@ class DisplayPane extends JTextField {
     setName("display");
   }
 
-  void updateText(CalculationState calculationState) {
-    setText(Float.toString(calculationState.rightTerm()));
+  void updateText(String text) {
+    setText(text);
   }
 
 }

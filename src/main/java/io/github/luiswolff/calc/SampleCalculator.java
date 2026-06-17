@@ -8,9 +8,8 @@ public class SampleCalculator extends JFrame {
 
   public SampleCalculator() {
     DisplayPane displayPane = new DisplayPane();
-    CalculationController controller = new CalculationController(displayPane::updateText);
-    NumberFieldPanel numberFieldPanel = new NumberFieldPanel(controller.createNumberFieldData());
-    numberFieldPanel.setHandler(controller::onAction);
+    NumberFieldPanel numberFieldPanel = new NumberFieldPanel();
+    new CalculationController(displayPane, numberFieldPanel);
 
     Container contentPane = getContentPane();
     contentPane.add(displayPane, BorderLayout.NORTH);

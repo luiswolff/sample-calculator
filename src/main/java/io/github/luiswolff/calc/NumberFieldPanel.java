@@ -1,33 +1,45 @@
 package io.github.luiswolff.calc;
 
+import io.github.luiswolff.calc.commands.CalculationCommand;
+import io.github.luiswolff.calc.commands.CalculatorPanel;
 import java.awt.GridLayout;
-import java.util.Arrays;
 import java.util.function.Consumer;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import io.github.luiswolff.calc.model.NumberFieldData;
+class NumberFieldPanel extends JPanel implements CalculatorPanel {
 
-class NumberFieldPanel extends JPanel {
+  private Consumer<CalculationCommand> commandInvoker;
 
-  NumberFieldPanel(NumberFieldData numberFieldData) {
-    super(new GridLayout(numberFieldData.countRows(), numberFieldData.countColumns()));
-    Arrays.stream(numberFieldData.buttons()).map(NumberButton::new).forEach(this::add);
+  NumberFieldPanel() {
+    super(new GridLayout());
   }
 
-  void setHandler(Consumer<String> handler) {
-    Arrays.stream(getComponents())
-        .filter(NumberButton.class::isInstance)
-        .map(NumberButton.class::cast)
-        .forEach(b -> b.addActionListener(_ -> handler.accept(b.getText())));
+  void setCommandInvoker(Consumer<CalculationCommand> commandInvoker) {
+    this.commandInvoker = commandInvoker;
   }
 
-  private static class NumberButton extends JButton {
+  @Override
+  public void setRowCount(int rows) {
+    ((GridLayout) getLayout()).setRows(rows);
+  }
 
-    NumberButton(String text) {
-      setName("button-" + text);
-      setText(text);
+  @Override
+  public void setColumnCount(int columns) {
+    ((GridLayout) getLayout()).setColumns(columns);
+  }
+
+  @Override
+  public void populateCommand(CalculationCommand command) {
+    add(new NumberButton(command));
+  }
+
+  private class NumberButton extends JButton {
+
+    NumberButton(CalculationCommand command) {
+      setText(command.appearance());
+      setName("button-" + getText());
+      addActionListener(_ -> commandInvoker.accept(command));
     }
   }
 }
