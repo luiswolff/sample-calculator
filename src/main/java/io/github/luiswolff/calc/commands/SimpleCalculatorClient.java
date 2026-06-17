@@ -20,13 +20,13 @@ public class SimpleCalculatorClient {
     panel.populateCommand(new NumberCommand("6", simpleCalculator));
     panel.populateCommand(new OperationCommand(Operation.MULTIPLYING, simpleCalculator));
 
-    // under middle row
+    // Under middle row
     panel.populateCommand(new NumberCommand("1", simpleCalculator));
     panel.populateCommand(new NumberCommand("2", simpleCalculator));
     panel.populateCommand(new NumberCommand("3", simpleCalculator));
     panel.populateCommand(new OperationCommand(Operation.SUBTRACTING, simpleCalculator));
 
-    // bottom row
+    // Bottom row
     panel.populateCommand(new ClearCommand(simpleCalculator));
     panel.populateCommand(new NumberCommand("0", simpleCalculator));
     panel.populateCommand(new EqualsCommand(simpleCalculator));
