@@ -15,7 +15,7 @@ class DummyUser {
       throw new RuntimeException(e);
     }
     robot.setAutoWaitForIdle(true);
-    robot.setAutoDelay(250);
+    robot.setAutoDelay(25);
   }
 
   void clickAt(Point componentsLocationOnScreen) {
