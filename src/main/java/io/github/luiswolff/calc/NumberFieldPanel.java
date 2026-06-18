@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 
 class NumberFieldPanel extends JPanel implements CalculatorPanel {
 
+  private final SampleCalculator sampleCalculator;
   private Consumer<CalculationCommand> commandInvoker;
 
-  NumberFieldPanel() {
+  NumberFieldPanel(SampleCalculator sampleCalculator) {
     super(new GridLayout());
+    this.sampleCalculator = sampleCalculator;
   }
 
   void setCommandInvoker(Consumer<CalculationCommand> commandInvoker) {
@@ -22,11 +24,13 @@ class NumberFieldPanel extends JPanel implements CalculatorPanel {
   @Override
   public void setRowCount(int rows) {
     ((GridLayout) getLayout()).setRows(rows);
+    sampleCalculator.setSize(sampleCalculator.getWidth(), rows * 50 + 20);
   }
 
   @Override
   public void setColumnCount(int columns) {
     ((GridLayout) getLayout()).setColumns(columns);
+    sampleCalculator.setSize(columns * 47, sampleCalculator.getHeight());
   }
 
   @Override
