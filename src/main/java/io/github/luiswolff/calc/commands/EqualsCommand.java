@@ -1,16 +1,20 @@
 package io.github.luiswolff.calc.commands;
 
+import java.util.function.Consumer;
+
 class EqualsCommand implements CalculationCommand {
   private final SimpleCalculator receiver;
+  private final Consumer<String> display;
 
-  EqualsCommand(SimpleCalculator receiver) {
+  EqualsCommand(SimpleCalculator receiver, Consumer<String> display) {
     this.receiver = receiver;
+    this.display = display;
   }
 
   @Override
-  public String execute() {
+  public void execute() {
     receiver.equals();
-    return receiver.getDisplay();
+    display.accept(receiver.getDisplay());
   }
 
   @Override

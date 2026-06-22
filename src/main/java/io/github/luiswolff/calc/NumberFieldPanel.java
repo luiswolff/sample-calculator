@@ -1,49 +1,38 @@
 package io.github.luiswolff.calc;
 
-import io.github.luiswolff.calc.commands.CalculationCommand;
-import io.github.luiswolff.calc.commands.CalculatorPanel;
 import java.awt.GridLayout;
-import java.util.function.Consumer;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-class NumberFieldPanel extends JPanel implements CalculatorPanel {
+class NumberFieldPanel extends JPanel {
 
   private final SampleCalculator sampleCalculator;
-  private Consumer<CalculationCommand> commandInvoker;
 
   NumberFieldPanel(SampleCalculator sampleCalculator) {
     super(new GridLayout());
     this.sampleCalculator = sampleCalculator;
   }
 
-  void setCommandInvoker(Consumer<CalculationCommand> commandInvoker) {
-    this.commandInvoker = commandInvoker;
-  }
+  void changeCommandPanel(int rows, int columns, List<CalculationCommandAction> action) {
+    removeAll();
+    invalidate();
 
-  @Override
-  public void setRowCount(int rows) {
-    ((GridLayout) getLayout()).setRows(rows);
+    GridLayout gridLayout = (GridLayout) getLayout();
+    gridLayout.setRows(rows);
+    gridLayout.setColumns(columns);
     sampleCalculator.setSize(sampleCalculator.getWidth(), rows * 50 + 20);
-  }
-
-  @Override
-  public void setColumnCount(int columns) {
-    ((GridLayout) getLayout()).setColumns(columns);
     sampleCalculator.setSize(columns * 47, sampleCalculator.getHeight());
+
+    action.stream().map(NumberButton::new).forEach(this::add);
+    validate();
   }
 
-  @Override
-  public void populateCommand(CalculationCommand command) {
-    add(new NumberButton(command));
-  }
+  private static class NumberButton extends JButton {
 
-  private class NumberButton extends JButton {
-
-    NumberButton(CalculationCommand command) {
-      setText(command.appearance());
+    NumberButton(CalculationCommandAction action) {
+      super(action);
       setName("button-" + getText());
-      addActionListener(_ -> commandInvoker.accept(command));
     }
   }
 }

@@ -1,6 +1,6 @@
 package io.github.luiswolff.calc.commands;
 
 public interface CalculationCommand {
-  String execute();
+  void execute();
   String appearance();
 }
