@@ -1,4 +1,4 @@
-package io.github.luiswolff.calc;
+package io.github.luiswolff.calc.app;
 
 
 import io.github.luiswolff.calc.commands.CalculationCommand;
@@ -8,16 +8,16 @@ import java.util.List;
 
 class CalculationController {
 
-  CalculationController(SampleCalculator sampleCalculator) {
+  CalculationController(CalculatorFrame calculatorFrame) {
     CalculationCommand[] menuCommands = CalculatorClient.menuCommands(
-        sampleCalculator.getDisplayPane()::updateText,
+        calculatorFrame.getDisplayPane()::updateText,
         commandPanelData -> {
           CalculationCommand[] panelCommands = commandPanelData.commands();
-          sampleCalculator.getNumberFieldPanel()
+          calculatorFrame.getNumberFieldPanel()
               .changeCommandPanel(commandPanelData.rows(), commandPanelData.columns(),
                   convert(panelCommands));
         });
-    sampleCalculator.getFrameMenuBar().init(convert(menuCommands));
+    calculatorFrame.getFrameMenuBar().init(convert(menuCommands));
   }
 
   private List<CalculationCommandAction> convert(CalculationCommand[] commands) {

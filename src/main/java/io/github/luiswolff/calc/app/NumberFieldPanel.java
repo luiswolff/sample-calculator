@@ -1,4 +1,4 @@
-package io.github.luiswolff.calc;
+package io.github.luiswolff.calc.app;
 
 import java.awt.GridLayout;
 import java.util.List;
@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 
 class NumberFieldPanel extends JPanel {
 
-  private final SampleCalculator sampleCalculator;
+  private final CalculatorFrame calculatorFrame;
 
-  NumberFieldPanel(SampleCalculator sampleCalculator) {
+  NumberFieldPanel(CalculatorFrame calculatorFrame) {
     super(new GridLayout());
-    this.sampleCalculator = sampleCalculator;
+    this.calculatorFrame = calculatorFrame;
   }
 
   void changeCommandPanel(int rows, int columns, List<CalculationCommandAction> action) {
@@ -21,8 +21,8 @@ class NumberFieldPanel extends JPanel {
     GridLayout gridLayout = (GridLayout) getLayout();
     gridLayout.setRows(rows);
     gridLayout.setColumns(columns);
-    sampleCalculator.setSize(sampleCalculator.getWidth(), rows * 50 + 20);
-    sampleCalculator.setSize(columns * 47, sampleCalculator.getHeight());
+    calculatorFrame.setSize(calculatorFrame.getWidth(), rows * 50 + 20);
+    calculatorFrame.setSize(columns * 47, calculatorFrame.getHeight());
 
     action.stream().map(NumberButton::new).forEach(this::add);
     validate();

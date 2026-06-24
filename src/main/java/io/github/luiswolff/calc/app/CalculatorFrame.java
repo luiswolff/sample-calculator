@@ -1,16 +1,16 @@
-package io.github.luiswolff.calc;
+package io.github.luiswolff.calc.app;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.swing.JFrame;
 
-public class SampleCalculator extends JFrame {
+public class CalculatorFrame extends JFrame {
 
   private final DisplayPane displayPane = new DisplayPane();
   private final NumberFieldPanel numberFieldPanel = new NumberFieldPanel(this);
   private final FrameMenuBar frameMenuBar = new FrameMenuBar();
 
-  public SampleCalculator() {
+  public CalculatorFrame() {
     new CalculationController(this);
 
     Container contentPane = getContentPane();
@@ -32,11 +32,6 @@ public class SampleCalculator extends JFrame {
 
   FrameMenuBar getFrameMenuBar() {
     return frameMenuBar;
-  }
-
-  static void main() {
-    SampleCalculator app = new SampleCalculator();
-    app.setVisible(true);
   }
 
 }

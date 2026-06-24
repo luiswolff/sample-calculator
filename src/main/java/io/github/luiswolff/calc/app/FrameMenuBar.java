@@ -1,4 +1,4 @@
-package io.github.luiswolff.calc;
+package io.github.luiswolff.calc.app;
 
 import java.awt.event.ActionEvent;
 import java.util.List;

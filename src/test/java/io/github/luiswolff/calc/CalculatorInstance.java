@@ -1,5 +1,6 @@
 package io.github.luiswolff.calc;
 
+import io.github.luiswolff.calc.app.CalculatorFrame;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -12,11 +13,11 @@ import javax.swing.text.JTextComponent;
 
 class CalculatorInstance {
 
-  private final SampleCalculator underTest;
+  private final CalculatorFrame underTest;
   private final Map<String, Component> componentByNameIndex;
 
   CalculatorInstance() {
-    underTest = new SampleCalculator();
+    underTest = new CalculatorFrame();
     invokeAndWait(() -> underTest.setVisible(true));
     componentByNameIndex = indexComponents(underTest);
   }

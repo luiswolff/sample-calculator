@@ -1,5 +1,7 @@
 package io.github.luiswolff.calc.commands;
 
+import io.github.luiswolff.calc.engine.Operation;
+import io.github.luiswolff.calc.engine.SimpleCalculator;
 import java.util.function.Consumer;
 
 class OperationCommand implements CalculationCommand {
@@ -21,6 +23,6 @@ class OperationCommand implements CalculationCommand {
 
   @Override
   public String appearance() {
-    return operation.getAppearance();
+    return operation.toString();
   }
 }

@@ -1,4 +1,4 @@
-package io.github.luiswolff.calc;
+package io.github.luiswolff.calc.app;
 
 import io.github.luiswolff.calc.commands.CalculationCommand;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,7 @@ class CalculationCommandAction extends AbstractAction {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    System.out.println(isEnabled());
     calculationCommand.execute();
   }
 }

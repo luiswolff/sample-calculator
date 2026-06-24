@@ -1,6 +1,8 @@
-package io.github.luiswolff.calc.commands;
+package io.github.luiswolff.calc.engine;
 
-enum Operation {
+import java.math.BigDecimal;
+
+public enum Operation {
   ADDING("+") {
     @Override
     Float perform(Float leftTerm, Float rightTerm) {
@@ -33,7 +35,8 @@ enum Operation {
 
   abstract Float perform(Float leftTerm, Float rightTerm);
 
-  String getAppearance() {
+  @Override
+  public String toString() {
     return appearance;
   }
 }

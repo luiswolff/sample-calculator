@@ -1,4 +1,4 @@
-package io.github.luiswolff.calc;
+package io.github.luiswolff.calc.app;
 
 import javax.swing.JTextField;
 

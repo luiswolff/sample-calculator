@@ -1,5 +1,6 @@
 package io.github.luiswolff.calc.commands;
 
+import io.github.luiswolff.calc.engine.SimpleCalculator;
 import java.util.function.Consumer;
 
 class EqualsCommand implements CalculationCommand {

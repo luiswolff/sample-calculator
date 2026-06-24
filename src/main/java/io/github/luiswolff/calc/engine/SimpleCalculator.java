@@ -1,43 +1,49 @@
-package io.github.luiswolff.calc.commands;
+package io.github.luiswolff.calc.engine;
 
-class SimpleCalculator {
+public class SimpleCalculator {
 
   private Float leftTerm;
   private Operation operation;
   private Float rightTerm;
   private Float result;
 
-  SimpleCalculator() {
+  public SimpleCalculator() {
     clear();
   }
 
-  void append(String number) {
+  public void append(Digit digit) {
+    if (result != null) {
+      clear();
+    }
     if (operation == null) {
-      leftTerm = Float.parseFloat(leftTerm.intValue() + number);
+      leftTerm = digit.append(leftTerm);
     } else {
-      rightTerm = Float.parseFloat(rightTerm.intValue() + number);
+      rightTerm = digit.append(rightTerm);
     }
   }
 
-  void define(Operation operation) {
+  public void define(Operation operation) {
+    if (this.operation != null) {
+      leftTerm = operation.perform(leftTerm, rightTerm);
+    }
     this.operation = operation;
     rightTerm = 0f;
   }
 
-  void equals() {
+  public void equals() {
     if (operation != null) {
       result = operation.perform(result == null ? leftTerm : result, rightTerm);
     }
   }
 
-  void clear() {
+  public void clear() {
     leftTerm = 0f;
     operation = null;
     rightTerm = null;
     result = null;
   }
 
-  String getDisplay() {
+  public String getDisplay() {
     return (result != null ? result
         : operation == null || rightTerm == 0f ? leftTerm : rightTerm).toString();
   }
