@@ -1,6 +1,5 @@
 package io.github.luiswolff.calc.app;
 
-import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
@@ -9,24 +8,21 @@ import javax.swing.JRadioButtonMenuItem;
 
 class FrameMenuBar extends JMenuBar {
 
-  void init(List<CalculationCommandAction> actions) {
+  void init(List<MenuCommandAction> actions) {
     JMenu calculatorMenu = new JMenu("Calculators");
     ButtonGroup calculatorGroup = new ButtonGroup();
     actions.stream()
-        .map(JRadioButtonMenuItem::new)
+        .map(MenuCommandItem::new)
         .peek(calculatorGroup::add)
-        .peek(calculatorMenu::add)
-        .limit(1)
-        .forEach(FrameMenuBar::selectAndFire);
+        .forEach(calculatorMenu::add);
     add(calculatorMenu);
   }
 
-  private static void selectAndFire(JRadioButtonMenuItem selected) {
-    CalculationCommandAction action = (CalculationCommandAction) selected.getAction();
-
-    selected.setSelected(true);
-    action.actionPerformed(new ActionEvent(selected,
-        ActionEvent.ACTION_PERFORMED,
-        (String) action.getValue(CalculationCommandAction.ACTION_COMMAND_KEY)));
+  private static class MenuCommandItem extends JRadioButtonMenuItem {
+    private MenuCommandItem(MenuCommandAction action) {
+      super(action);
+      setSelected(action.isDefault());
+    }
   }
+
 }

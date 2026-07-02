@@ -14,7 +14,14 @@ class CalculationCommandAction extends AbstractAction {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    System.out.println(isEnabled());
     calculationCommand.execute();
+  }
+
+  public int width() {
+    return calculationCommand.width();
+  }
+
+  public int height() {
+    return calculationCommand.height();
   }
 }

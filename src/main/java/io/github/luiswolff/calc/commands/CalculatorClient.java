@@ -6,18 +6,43 @@ import io.github.luiswolff.calc.engine.SimpleCalculator;
 import java.util.function.Consumer;
 
 public class CalculatorClient {
+  private final Consumer<String> display;
+  private CommandPanelData commandPanelData;
 
-  public static CalculationCommand[] menuCommands(Consumer<String> display,
-      Consumer<CommandPanelData> commandPanel) {
-    return new CalculationCommand[]{
-        new ChangeCommandPanelCommand("Simple Calculator", commandPanel, () -> simpleCalculatorCommands(display))
+  public CalculatorClient(Consumer<String> display) {
+    this.display = display;
+    simpleCalculatorCommands();
+  }
+
+  public MenuCommand[] menuCommands() {
+    return new MenuCommand[]{
+        menuCommand("Simple Calculator", true, this::simpleCalculatorCommands)
     };
   }
 
-  private static CommandPanelData simpleCalculatorCommands(Consumer<String> display) {
+  private static MenuCommand menuCommand(String appearance, boolean isDefault, Runnable action) {
+    return new MenuCommand() {
+      @Override
+      public void execute() {
+        action.run();
+      }
+
+      @Override
+      public String appearance() {
+        return appearance;
+      }
+
+      @Override
+      public boolean isDefault() {
+        return isDefault;
+      }
+    };
+  }
+
+  private void simpleCalculatorCommands() {
     var simpleCalculator = new SimpleCalculator();
     display.accept(simpleCalculator.getDisplay());
-    return new CommandPanelData(4, 4,
+    commandPanelData = new CommandPanelData(4, 4,
         // Top Row
         new NumberCommand(Digit.SEVEN, simpleCalculator, display),
         new NumberCommand(Digit.EIGHT, simpleCalculator, display),
@@ -44,4 +69,7 @@ public class CalculatorClient {
     );
   }
 
+  public CommandPanelData getCommandPanelData() {
+    return commandPanelData;
+  }
 }

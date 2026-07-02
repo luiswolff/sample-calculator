@@ -1,7 +1,5 @@
 package io.github.luiswolff.calc.engine;
 
-import java.math.BigDecimal;
-
 public enum Operation {
   ADDING("+") {
     @Override
