@@ -1,27 +1,30 @@
 package io.github.luiswolff.calc.app;
 
-import io.github.luiswolff.calc.commands.CalculationCommand;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 class CalculationCommandAction extends AbstractAction {
-  private final CalculationCommand calculationCommand;
+  private final Runnable action;
+  private final int width;
+  private final int height;
 
-  CalculationCommandAction(CalculationCommand calculationCommand) {
-    super(calculationCommand.appearance());
-    this.calculationCommand = calculationCommand;
+  CalculationCommandAction(String name, Runnable action, int width, int height) {
+    super(name);
+    this.action = action;
+    this.width = width;
+    this.height = height;
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    calculationCommand.execute();
+    action.run();
   }
 
   public int width() {
-    return calculationCommand.width();
+    return width;
   }
 
   public int height() {
-    return calculationCommand.height();
+    return height;
   }
 }

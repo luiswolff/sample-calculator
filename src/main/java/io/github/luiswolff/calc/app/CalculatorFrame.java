@@ -8,7 +8,6 @@ public class CalculatorFrame extends JFrame {
 
   private final DisplayPane displayPane = new DisplayPane();
   private final NumberFieldPanel numberFieldPanel = new NumberFieldPanel(this);
-  private final FrameMenuBar frameMenuBar = new FrameMenuBar();
 
   public CalculatorFrame() {
     new CalculationController(this);
@@ -16,7 +15,6 @@ public class CalculatorFrame extends JFrame {
     Container contentPane = getContentPane();
     contentPane.add(displayPane, BorderLayout.NORTH);
     contentPane.add(numberFieldPanel, BorderLayout.CENTER);
-    setJMenuBar(frameMenuBar);
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     setResizable(false);
@@ -28,10 +26,6 @@ public class CalculatorFrame extends JFrame {
 
   NumberFieldPanel getNumberFieldPanel() {
     return numberFieldPanel;
-  }
-
-  FrameMenuBar getFrameMenuBar() {
-    return frameMenuBar;
   }
 
 }
