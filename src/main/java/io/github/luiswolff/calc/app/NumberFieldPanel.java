@@ -24,7 +24,7 @@ class NumberFieldPanel extends JPanel {
     removeAll();
     invalidate();
 
-    calculatorFrame.setSize(columns * 47, rows * 50 + 20);
+    calculatorFrame.setSize(columns * 47, rows * 37 + 20);
 
     record GridCell(int gridx, int gridy) {
 
@@ -63,8 +63,8 @@ class NumberFieldPanel extends JPanel {
 
         add(new NumberButton(action), gbc);
 
-        for (int skipX = 0; skipX < action.height(); skipX++) {
-          for (int skipY = 0; skipY < action.width(); skipY++) {
+        for (int skipX = 0; skipX < action.width(); skipX++) {
+          for (int skipY = 0; skipY < action.height(); skipY++) {
             if (skipX == 0 && skipY == 0) {
               continue;
             }
@@ -82,7 +82,6 @@ class NumberFieldPanel extends JPanel {
     NumberButton(CalculationCommandAction action) {
       super(action);
       setName("button-" + getText());
-      setSize(47, 150);
     }
   }
 }

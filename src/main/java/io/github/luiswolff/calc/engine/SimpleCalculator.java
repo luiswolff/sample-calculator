@@ -6,6 +6,7 @@ public class SimpleCalculator {
   private Operation operation;
   private Float rightTerm;
   private Float result;
+  private Short decimalPlace;
 
   public SimpleCalculator() {
     clear();
@@ -16,9 +17,15 @@ public class SimpleCalculator {
       clear();
     }
     if (operation == null) {
-      leftTerm = digit.append(leftTerm);
+      leftTerm = digit.append(leftTerm, decimalPlace != null ? decimalPlace++ : 0);
     } else {
-      rightTerm = digit.append(rightTerm);
+      rightTerm = digit.append(rightTerm, decimalPlace != null ? decimalPlace++ : 0);
+    }
+  }
+
+  public void appendDecimalPlace() {
+    if (decimalPlace == null) {
+      decimalPlace = 1;
     }
   }
 
@@ -28,12 +35,14 @@ public class SimpleCalculator {
     }
     this.operation = operation;
     rightTerm = 0f;
+    decimalPlace = null;
   }
 
   public void equals() {
     if (operation != null) {
       result = operation.perform(result == null ? leftTerm : result, rightTerm);
     }
+    decimalPlace = null;
   }
 
   public void clear() {
@@ -41,6 +50,7 @@ public class SimpleCalculator {
     operation = null;
     rightTerm = null;
     result = null;
+    decimalPlace = null;
   }
 
   public String getDisplay() {
