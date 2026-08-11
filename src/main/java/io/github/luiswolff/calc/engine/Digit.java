@@ -20,7 +20,7 @@ public enum Digit {
   }
 
   Float append(Float term, Short decimalPlace) {
-    return (float) (term * (decimalPlace == 0 ? 10 : 0) + number / Math.pow(10, decimalPlace));
+    return (float) (term * (decimalPlace == 0 ? 10 : 1) + number / Math.pow(10, decimalPlace));
   }
 
   @Override

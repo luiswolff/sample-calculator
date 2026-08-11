@@ -16,12 +16,12 @@ class CalculationController {
 
     CommandPanelData commandPanelData = calculatorClient.getCommandPanelData();
     List<CalculationCommandAction> actions = Arrays.stream(commandPanelData.cells())
-        .map(this::toAction)
+        .map(CalculationController::toAction)
         .toList();
     numberFieldPanel.changeCommandPanel(commandPanelData.rows(), commandPanelData.columns(), actions);
   }
 
-  CalculationCommandAction toAction(CommandPanelCell panelCell) {
+  private static CalculationCommandAction toAction(CommandPanelCell panelCell) {
     return new CalculationCommandAction(
         panelCell.command().appearance(),
         panelCell.command()::execute,
