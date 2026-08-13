@@ -226,6 +226,72 @@ class SampleCalculatorTest {
     testAddition();
   }
 
+  @Test
+  void testAdditionDecimalNumbers() {
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("0.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_THREE);
+    expectDisplayShowsText("0.3");
+    clickOnComponent(ExpectedUiComponents.BUTTON_PLUS);
+    expectDisplayShowsText("0.3");
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("0.3");
+    clickOnComponent(ExpectedUiComponents.BUTTON_SIX);
+    expectDisplayShowsText("0.6");
+    clickOnComponent(ExpectedUiComponents.BUTTON_EQUALS);
+    expectDisplayShowsText("0.9");
+  }
+
+  @Test
+  void testSubstractionDecimalNumbers() {
+    clickOnComponent(ExpectedUiComponents.BUTTON_ONE);
+    expectDisplayShowsText("1.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("1.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_TWO);
+    expectDisplayShowsText("1.2");
+    clickOnComponent(ExpectedUiComponents.BUTTON_MINUS);
+    expectDisplayShowsText("1.2");
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("1.2");
+    clickOnComponent(ExpectedUiComponents.BUTTON_THREE);
+    expectDisplayShowsText("0.3");
+    clickOnComponent(ExpectedUiComponents.BUTTON_EQUALS);
+    expectDisplayShowsText("0.9");
+  }
+
+  @Test
+  void testMultiplicationDecimalNumbers() {
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("0.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_THREE);
+    expectDisplayShowsText("0.3");
+    clickOnComponent(ExpectedUiComponents.BUTTON_MULTIPLY);
+    expectDisplayShowsText("0.3");
+    clickOnComponent(ExpectedUiComponents.BUTTON_THREE);
+    expectDisplayShowsText("3.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_EQUALS);
+    expectDisplayShowsText("0.9");
+  }
+
+  @Test
+  void testDivisionDecimalNumbers() {
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("0.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_ZERO);
+    expectDisplayShowsText("0.0");
+    clickOnComponent(ExpectedUiComponents.BUTTON_NINE);
+    expectDisplayShowsText("0.09");
+    clickOnComponent(ExpectedUiComponents.BUTTON_DEVIATE);
+    expectDisplayShowsText("0.09");
+    clickOnComponent(ExpectedUiComponents.BUTTON_DOT);
+    expectDisplayShowsText("0.09");
+    clickOnComponent(ExpectedUiComponents.BUTTON_ONE);
+    expectDisplayShowsText("0.1");
+    clickOnComponent(ExpectedUiComponents.BUTTON_EQUALS);
+    expectDisplayShowsText("0.9");
+  }
+
 
   private void clickOnComponent(ExpectedUiComponents uiComponent) {
     dummyUser.clickAt(calculatorInstance.posOf(uiComponent));
