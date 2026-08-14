@@ -52,8 +52,8 @@ The following command builds the project:
 mvn clean package
 ```
 
-After a build the application can be started with the following command (Windows):
+After a build the application can be started with the following command:
 
 ```(cmd)
-java -classpath target\sample-calculator-1.0-SNAPSHOT.jar io.github.luiswolff.calc.Launcher
+java -classpath target/sample-calculator-1.0-SNAPSHOT.jar io.github.luiswolff.calc.Launcher
 ```
