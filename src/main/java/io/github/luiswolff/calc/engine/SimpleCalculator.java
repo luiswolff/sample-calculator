@@ -1,12 +1,14 @@
 package io.github.luiswolff.calc.engine;
 
+import java.math.BigDecimal;
+
 public class SimpleCalculator {
 
-  private Float leftTerm;
+  private BigDecimal leftTerm;
   private Operation operation;
-  private Float rightTerm;
-  private Float result;
-  private Short decimalPlace;
+  private BigDecimal rightTerm;
+  private BigDecimal result;
+  private Integer decimalPlace;
 
   public SimpleCalculator() {
     clear();
@@ -17,10 +19,16 @@ public class SimpleCalculator {
       clear();
     }
     if (operation == null) {
-      leftTerm = digit.append(leftTerm, decimalPlace != null ? decimalPlace++ : 0);
+      leftTerm = append(digit, leftTerm);
     } else {
-      rightTerm = digit.append(rightTerm, decimalPlace != null ? decimalPlace++ : 0);
+      rightTerm = append(digit, rightTerm);
     }
+  }
+
+  private BigDecimal append(Digit digit, BigDecimal term) {
+    return decimalPlace == null ?
+        digit.appendIntegerPart(term)
+        : digit.appendFractionalPart(term, decimalPlace++);
   }
 
   public void appendDecimalPlace() {
@@ -34,7 +42,7 @@ public class SimpleCalculator {
       leftTerm = operation.perform(leftTerm, rightTerm);
     }
     this.operation = operation;
-    rightTerm = 0f;
+    rightTerm = BigDecimal.ZERO;
     decimalPlace = null;
   }
 
@@ -46,7 +54,7 @@ public class SimpleCalculator {
   }
 
   public void clear() {
-    leftTerm = 0f;
+    leftTerm = BigDecimal.ZERO;
     operation = null;
     rightTerm = null;
     result = null;
@@ -54,7 +62,15 @@ public class SimpleCalculator {
   }
 
   public String getDisplay() {
-    return (result != null ? result
-        : operation == null || rightTerm == 0f ? leftTerm : rightTerm).toString();
+    BigDecimal displayValue;
+    if (result != null) {
+      displayValue = result;
+    } else if (operation == null || rightTerm.compareTo(BigDecimal.ZERO) == 0) {
+      displayValue = leftTerm;
+    } else {
+      displayValue = rightTerm;
+    }
+    // using toString from Float because JUnit-Tests are based on this formatter logic
+    return Float.toString(displayValue.floatValue());
   }
 }

@@ -1,30 +1,36 @@
 package io.github.luiswolff.calc.engine;
 
+import java.math.BigDecimal;
+
 public enum Digit {
-  ZERO(0f),
-  ONE(1f),
-  TWO(2f),
-  THREE(3f),
-  FOUR(4f),
-  FIVE(5f),
-  SIX(6f),
-  SEVEN(7f),
-  EIGHT(8f),
-  NINE(9f)
+  ZERO(0L),
+  ONE(1L),
+  TWO(2L),
+  THREE(3L),
+  FOUR(4L),
+  FIVE(5L),
+  SIX(6L),
+  SEVEN(7L),
+  EIGHT(8L),
+  NINE(9L)
   ;
 
-  private final float number;
+  private final long number;
 
-  Digit(float number) {
+  Digit(long number) {
     this.number = number;
   }
 
-  Float append(Float term, Short decimalPlace) {
-    return (float) (term * (decimalPlace == 0 ? 10 : 1) + number / Math.pow(10, decimalPlace));
+  BigDecimal appendIntegerPart(BigDecimal term) {
+    return term.multiply(BigDecimal.TEN).add(BigDecimal.valueOf(number));
+  }
+
+  BigDecimal appendFractionalPart(BigDecimal term, Integer decimalPlace) {
+    return  term.add(BigDecimal.valueOf(number, decimalPlace));
   }
 
   @Override
   public String toString() {
-    return String.format("%.0f", number);
+    return Long.toString(number);
   }
 }
