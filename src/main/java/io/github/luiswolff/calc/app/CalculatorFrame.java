@@ -12,6 +12,7 @@ public class CalculatorFrame extends JFrame {
   public CalculatorFrame() {
     new CalculationController(this);
 
+    setJMenuBar(new CalculatorMenuBar(this));
     Container contentPane = getContentPane();
     contentPane.add(displayPane, BorderLayout.NORTH);
     contentPane.add(numberFieldPanel, BorderLayout.CENTER);

@@ -1,15 +1,15 @@
 package io.github.luiswolff.calc.commands;
 
 import io.github.luiswolff.calc.engine.Operation;
-import io.github.luiswolff.calc.engine.SimpleCalculator;
+import io.github.luiswolff.calc.engine.Calculator;
 import java.util.function.Consumer;
 
 class OperationCommand implements CalculationCommand {
   private final Operation operation;
-  private final SimpleCalculator receiver;
+  private final Calculator receiver;
   private final Consumer<String> display;
 
-  OperationCommand(Operation operation, SimpleCalculator receiver, Consumer<String> display) {
+  OperationCommand(Operation operation, Calculator receiver, Consumer<String> display) {
     this.operation = operation;
     this.receiver = receiver;
     this.display = display;

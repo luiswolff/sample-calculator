@@ -1,15 +1,15 @@
 package io.github.luiswolff.calc.commands;
 
 import io.github.luiswolff.calc.engine.Digit;
-import io.github.luiswolff.calc.engine.SimpleCalculator;
+import io.github.luiswolff.calc.engine.Calculator;
 import java.util.function.Consumer;
 
 class NumberCommand implements CalculationCommand {
   private final Digit digit;
-  private final SimpleCalculator receiver;
+  private final Calculator receiver;
   private final Consumer<String> display;
 
-  NumberCommand(Digit digit, SimpleCalculator receiver, Consumer<String> display) {
+  NumberCommand(Digit digit, Calculator receiver, Consumer<String> display) {
     this.digit = digit;
     this.receiver = receiver;
     this.display = display;

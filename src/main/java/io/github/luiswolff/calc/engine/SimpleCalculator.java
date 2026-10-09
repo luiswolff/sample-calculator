@@ -2,7 +2,7 @@ package io.github.luiswolff.calc.engine;
 
 import java.math.BigDecimal;
 
-public class SimpleCalculator {
+public class SimpleCalculator implements Calculator {
 
   private BigDecimal leftTerm;
   private Operation operation;
@@ -14,6 +14,7 @@ public class SimpleCalculator {
     clear();
   }
 
+  @Override
   public void append(Digit digit) {
     if (result != null) {
       clear();
@@ -31,12 +32,14 @@ public class SimpleCalculator {
         : digit.appendFractionalPart(term, decimalPlace++);
   }
 
+  @Override
   public void appendDecimalPlace() {
     if (decimalPlace == null) {
       decimalPlace = 1;
     }
   }
 
+  @Override
   public void define(Operation operation) {
     if (this.operation != null) {
       leftTerm = operation.perform(leftTerm, rightTerm);
@@ -46,6 +49,7 @@ public class SimpleCalculator {
     decimalPlace = null;
   }
 
+  @Override
   public void equals() {
     if (operation != null) {
       result = operation.perform(result == null ? leftTerm : result, rightTerm);
@@ -53,6 +57,7 @@ public class SimpleCalculator {
     decimalPlace = null;
   }
 
+  @Override
   public void clear() {
     leftTerm = BigDecimal.ZERO;
     operation = null;
@@ -61,6 +66,7 @@ public class SimpleCalculator {
     decimalPlace = null;
   }
 
+  @Override
   public String getDisplay() {
     BigDecimal displayValue;
     if (result != null) {

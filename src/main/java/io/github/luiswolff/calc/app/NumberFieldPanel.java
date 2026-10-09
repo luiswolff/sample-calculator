@@ -23,9 +23,6 @@ class NumberFieldPanel extends JPanel {
   }
 
   void changeCommandPanel(CommandPanel commandPanel) {
-    removeAll();
-    invalidate();
-
     calculatorFrame.setSize(commandPanel.getColumns() * 47, commandPanel.getRows() * 37 + 20);
 
     for (var action : commandPanel.getCommandPanelCells()) {
@@ -38,8 +35,6 @@ class NumberFieldPanel extends JPanel {
 
       add(new NumberButton(action.command()), gbc);
     }
-
-    validate();
   }
 
   private static class NumberButton extends JButton {
